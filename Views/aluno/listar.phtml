@@ -17,13 +17,23 @@
 
         <tbody>
             <?php
-            foreach($alunos as $aluno) {
-                echo "
-                    <tr>
-                        <td>{$aluno->id}</td>
-                        <td>{$aluno->nome}</td>
-                    </tr>
-                ";
+            if(isset($alunos) && sizeof($alunos) > 0) {
+
+                foreach($alunos as $aluno) {
+                    echo "
+                        <tr>
+                            <td>{$aluno->id}</td>
+                            <td>{$aluno->nome}</td>
+                            <td>{$aluno->matricula}</td>
+                            <td>{$aluno->cpf}</td>
+                            <td>{$aluno->email}</td>
+                            <td>
+                                <a href='/alunos/editar' class='btn btn-warning'>Editar</a>
+                                <button class='btn btn-danger'>Excluir</button>
+                            </td>
+                        </tr>
+                    ";
+                }
             }
             ?>
         </tbody>

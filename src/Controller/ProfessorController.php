@@ -4,11 +4,20 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-class ProfessorController
+use App\Repository\ProfessorRepository;
+
+class ProfessorController extends AbstractController
 {
+
+
     public function listar(): void
     {
-        echo "Pagina de listar";
+        $rep = new ProfessorRepository();
+        $professores = $rep->buscarTodos();
+
+        $this->render("professor/listar", [
+            'professores' => $professores,
+        ]);
     }
 
     public function cadastrar(): void
@@ -18,7 +27,10 @@ class ProfessorController
 
     public function excluir(): void
     {
-        echo "Pagina de excluir";
+        $id = $_GET['id'];
+        $rep = new ProfessorRepository();
+        $rep->excluir($id);
+        $this->render("professor/excluir");
     }
 
     public function editar(): void
