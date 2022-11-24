@@ -2,38 +2,35 @@
 
 declare(strict_types=1);
 
-// require "../Model/Render.php";
+namespace App\Controller;
 
-// use Render;
+use App\Repository\AlunoRepository;
 
-class AlunoController
+class AlunoController extends AbstractController
 {
     public function listar(): void
     {
-        $this->renderizar('listar');
+        $rep = new AlunoRepository();
+
+        $alunos = $rep->buscarTodos();
+
+        $this->render('aluno/listar', [
+            'alunos' => $alunos,
+        ]);
     }
 
     public function cadastrar(): void
     {
-        $this->renderizar('cadastrar');
+        $this->render('aluno/cadastrar');
     }
 
     public function excluir(): void
     {
-        $this->renderizar('excluir');
+        $this->render('aluno/excluir');
     }
 
     public function editar(): void
     {
-        $this->renderizar('editar');
-    }
-
-    public function renderizar(string $arquivo, ?array $dados = null)
-    {
-        include "../Views/template/header.phtml";
-        include "../Views/aluno/{$arquivo}.phtml";
-        $dados;
-
-        include "../Views/template/footer.phtml";
+        $this->render('aluno/editar');
     }
 }
